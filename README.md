@@ -4,7 +4,7 @@ Sin-Yi's personal website
 
 ### 2019-08-06
 
-
+Clean unnecessary files and back up the website 
 
 ### 2019-07-30 
 
