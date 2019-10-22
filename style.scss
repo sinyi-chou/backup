@@ -319,7 +319,7 @@ img {
 //
 
 .wrapper-sidebar {
-  width: 30%;
+  width: 20%;
 	-webkit-background-size: cover;
 	background-size: cover;
 	background-color: $background-color;
@@ -529,7 +529,7 @@ nav {
   position: fixed;
   z-index: 4;
   padding: 60px 20px 0 20px;
-  
+
   &:before{
     content:"目录";
     margin: 0 0 1em 1em;
@@ -678,7 +678,7 @@ nav {
   clear:both;
   width:100%;
   bottom:0;
-  
+
   @include mobile {
     display: none;
   }
@@ -687,7 +687,7 @@ nav {
 
 .wrapper-footer-mobile {
   display: none;
-  
+
   @include mobile {
     display: block;
     width: 100%;
@@ -721,7 +721,7 @@ footer {
       height: 20px;
       width: 20px;
       fill: $base-lighten-color;
-      
+
       &:hover {
         fill: $link-lighten-color;
       }
@@ -745,5 +745,3 @@ footer {
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
 @import "gitalk";
-
-
