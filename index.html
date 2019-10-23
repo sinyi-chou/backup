@@ -8,7 +8,7 @@ layout: default
 {% endif %}
 
 <div class="posts">
-  
+
   {% for post in paginator.posts %}
   {% if post.pinned==true %}
     <article class="post pinned">
@@ -44,7 +44,7 @@ layout: default
     </article>
     {% endif %}
   {% endfor %}
-  
+
   {% for post in paginator.posts %}
     {% unless post.pinned %}
     <article class="post">
@@ -72,7 +72,7 @@ layout: default
         {{ post.excerpt | truncate: 200 }}
       </div>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+      <a href="{{ site.baseurl }}{{ post.url }}">Read More</a>
     </article>
     {% endunless %}
   {% endfor %}
