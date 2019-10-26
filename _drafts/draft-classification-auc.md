@@ -17,13 +17,13 @@ AUC is short for Area under ROC(Receiver operating characteristics) curve. AUC s
 
 Let's start with confusion matrix with binary classification. As the figure shown below, confusion matrix summarizes all the conditions in a binary classification model. One thing to note here is that the confusion matrix is based on certain threshold to identify positive and negative class. False positive and false negative indicate that the case is identified by model incorrectly.
 
-<!-![confusion matrix](){width=50%}->
-
-<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png" width="600" height="500" />
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png" width="300" height="400" />
 
 All those statistics are used to compute metrics to show the model performance in different perspective, as the figure shown below. Among all those metrics, false positive rate(x-axis) and true positive rate(y-axis) are used to plot ROC curve.
 
-![definition](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png){width=50%}
+
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/metric_definition.png" width="400" height="300" />
+
 
 Since there are countless values for the cut-off threshold to generate the predicted labels, AUC provides an aggregated view across all threshold.
 
@@ -31,11 +31,15 @@ Since there are countless values for the cut-off threshold to generate the predi
 
 ![threshold animation](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/classification_threshold.gif)
 
-![proba table](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/prob_table.png)
 
-![roc animation](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/roc_plot_animation.gif)
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/prob_table.png" width="100" height="200" />
 
-![roc plot](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/ROC_plot.png)
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/roc_plot_animation.gif" width="200" height="200" />
+
+
+
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/ROC_plot.png" width="400" height="400" />
+
 
 # Statistic Interpretation of AUC
 Rank
