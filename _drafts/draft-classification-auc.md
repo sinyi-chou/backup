@@ -17,18 +17,23 @@ AUC is short for Area under ROC(Receiver operating characteristics) curve. AUC s
 
 Let's start with confusion matrix with binary classification. As the figure shown below, confusion matrix summarizes all the conditions in a binary classification model. One thing to note here is that the confusion matrix is based on certain threshold to identify positive and negative class. False positive and false negative indicate that the case is identified by model incorrectly.
 
-![confusion matrix](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png)
+![confusion matrix](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png){width=50%}
 
 All those statistics are used to compute metrics to show the model performance in different perspective, as the figure shown below. Among all those metrics, false positive rate(x-axis) and true positive rate(y-axis) are used to plot ROC curve.
 
-![definition](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png)
+![definition](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png){width=50%}
 
-Since there are countless values for the cut-off threshold to generate the predicted labels, AUC provides an aggregated view across all threshold. 
+Since there are countless values for the cut-off threshold to generate the predicted labels, AUC provides an aggregated view across all threshold.
 
  The purpose is to allow the viewer to assess the accuracy of the test M for any possible value of the cutoff c. This aids in deciding what cutoff to use in practice, comparing different tests for the same thing, and for evaluating the overall accuracy. A key advantage of our approach is that the values of the cutoffs are visible!
 
-![animation](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/classification_threshold.gif)
+![threshold animation](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/classification_threshold.gif)
 
+![proba table](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/prob_table.png)
+
+![roc animation](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/roc_plot_animation.gif)
+
+![roc plot](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/ROC_plot.png)
 
 # Statistic Interpretation of AUC
 Rank
@@ -47,7 +52,7 @@ two distribution separation
 ### Reference
 1. [An introduction to ROC analysis](https://www.sciencedirect.com/science/article/abs/pii/S016786550500303X)
 2. [Google Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course/ml-intro)
-3.
+3. http://www.medicalbiostatistics.com/roccurve.pdf
 
 . For a binary test and a binary disease state, the following table summarizes the possible errors that one can make using the test as a prediction of a disease state measured by some gold standard
 
