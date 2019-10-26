@@ -17,12 +17,12 @@ AUC is short for Area under ROC(Receiver operating characteristics) curve. AUC s
 
 Let's start with confusion matrix with binary classification. As the figure shown below, confusion matrix summarizes all the conditions in a binary classification model. One thing to note here is that the confusion matrix is based on certain threshold to identify positive and negative class. False positive and false negative indicate that the case is identified by model incorrectly.
 
-<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png" width="300" height="400" />
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png" src="#" height="50%" />
 
 All those statistics are used to compute metrics to show the model performance in different perspective, as the figure shown below. Among all those metrics, false positive rate(x-axis) and true positive rate(y-axis) are used to plot ROC curve.
 
 
-<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/metric_definition.png" width="400" height="300" />
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/metric_definition.png" src="#" height="50%"  />
 
 
 Since there are countless values for the cut-off threshold to generate the predicted labels, AUC provides an aggregated view across all threshold.
