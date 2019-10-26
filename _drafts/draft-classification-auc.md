@@ -32,9 +32,9 @@ Since there are countless values for the cut-off threshold to generate the predi
 
 ![threshold animation](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/classification_threshold.gif)
 
-<p align="center">
-<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/prob_table.png" src="#" height="20%" /><img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/roc_plot_animation.gif" src="#" width="70%" />
-</p>
+
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/prob_table.png" src="#" height="10%" /><img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/roc_plot_animation.gif" src="#" width="70%" />
+
 
 <p align="center">
 <img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/ROC_plot.png" src="#" width="70%" />
