@@ -20,7 +20,7 @@ Let's start with confusion matrix with binary classification. As the figure show
 ![confusion matrix](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png)
 <p align="center">
 <img src="/assets/classification/metric_definition.png">
-<img src="/assets/classification/metric_definition.png" src="#" width="50%"  />
+<img src="/assets/classification/metric_definition.png" width="50%"  />
 <img src="/images/classification/confusion_matix.png"/>
 </p>
 All those statistics are used to compute metrics to show the model performance in different perspective, as the figure shown below. Among all those metrics, false positive rate(x-axis) and true positive rate(y-axis) are used to plot ROC curve.
@@ -49,7 +49,7 @@ positive over negative
 
 # Visualization of AUC
 threshold + dot
-$$AUC = P(f(x+)>f(x-)|class(x+)=1, class(x-)=0)$$
+$AUC = P(f(x+)>f(x-)|class(x+)=1, class(x-)=0)$
 two distribution separation
 
 # Summary
