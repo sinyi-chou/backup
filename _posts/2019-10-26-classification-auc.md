@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Classification: model evaluation - AUC
-date: 2019-10-27
+title: Pandas - Classification: Model Evaluation - AUC
+date: 2019-10-26
 Author: Sin-Yi Chou
 categories: [Data Science]
 tags: [data science, classification, machine learning]
@@ -80,4 +80,5 @@ To illustrate how AUC affected by different level of separation/discrimination, 
 3. [ROC Curve](http://www.medicalbiostatistics.com/roccurve.pdf)
 4. [ROC curves and Area Under the Curve explained](https://www.dataschool.io/roc-curves-and-auc-explained/)
 5. [Probabilistic interpretation of AUC](https://www.alexejgossmann.com/auc)
+
 Some great ideas of plots are from the reference. All the plots and animation in the blog are made on my own. Please feel to use it with the reference/citation with my watermark
