@@ -7,14 +7,14 @@ tags: [data science, classification, machine learning]
 comments: true
 ---
 
-While taking courses of machine learning, you would always hear that AUC is a useful metric to evaluate the model. The higher the values (range from 0 to 1), the better the model is.  However, what is AUC? What's the theory behind to make it a great metric? We'll have a deep dive in this post.
+Remember in machine learning courses, you learn that AUC is a useful metric to evaluate classifier. The higher the value (ranges from 0 to 1), the better the model is.  However, what exactly is AUC and what makes it a great metric? We'll have a deep dive and explore the theory behind.
 
-# AUC - Aread under ROC curve
-AUC is short for Area under ROC(Receiver operating characteristics) curve. AUC serves as a general performance metrics to measure the binary classification model performance without specific threshold. AUC could only be calculated while the model is able to provide probability prediction. In order to understand AUC, let's talk about ROC curve first.
+# AUC - Area under ROC curve
+AUC is short for the Area Under ROC (Receiver Operating Characteristics) curve. As a general performance metric, AUC measures the binary classification model performance without the need to specify a threshold. Note that AUC could only be calculated if the model is capable of providing probability prediction. Before going further into AUC, let's first talk about the ROC curve.
 
-# ROC Curve - Receiver operating characteristics
+# ROC Curve - Receiver operating characteristics curve
 
-Let's start with confusion matrix with binary classification. As the figure shown below, confusion matrix summarizes all the conditions - true positive, false positive, true negative and false negative in a binary classification model. False positive and false negative indicate that the case is identified by model incorrectly. True positive and True negative show the predictions are correct. One thing to note here is that all the measurements are determined by the predicted classes based on individual cut-off threshold of the probability. In other words, all of the measures are single-threshold measures. They couldn't provide an overview of the performance with varying threshold.
+In the figure below, the confusion matrix summarizes all of the possible conditions - true positive, false positive, true negative and false negative of a binary classification model. False positive and false negative indicate that the model incorrectly identifies the case, whereas true positive and true negative show the predictions are correct. One thing to note here is that all the measurements are determined by the predicted classes based on individual cut-off threshold of the probability. In other words, all of the measurements are single-threshold measures and they cannot provide an overview of the performance with varying threshold.
 
 
 <p align="center">
@@ -22,15 +22,15 @@ Let's start with confusion matrix with binary classification. As the figure show
 </p>
 <p style="clear: both;">
 </p>
- Threshold-invariant metrics are able to provide the overall performance of model despite of the chosen threshold, such as ROC/AUC & logloss. The figure below is a plot of ROC curve, which false positive rate -FPR, also called recall, (x-axis) and true positive rate - TPR (y-axis) are used for plotting. Each point in ROC curve is computed based on one cutoff threshold, labelled on the plot. AUC is the area under the curve. While ROC curve moves toward left-top, the value of AUC would increase with higher TPR and lower FPR for any threshold.
+ Threshold-invariant metrics, such as AUC & logloss, are capable of measuring the overall model performance despite any chosen threshold. The figure below is a plot of ROC curve, in which false positive rate - FPR (x-axis) and true positive rate - TPR, or also called recall, (y-axis) are used for plotting. Each point in the ROC curve is computed based on the specific cutoff threshold that is labeled on the plot, and AUC is the area under the curve. While the ROC curve moves towards the upper-left corner, the value of AUC increases with higher TPR and lower FPR for any threshold.
 
 <p align="center">
 <img src="/images/classification/ROC_plot.png" width="70%" />
 </p>
 
-Let's look at the animation below with changing cut-off threshold. At first, FPR is 0 and TPR/Recall is 1 with higher threshold. While the threshold become smaller, TPR decreases and FPR increases with more false positive are classified. TPR would reach 1 until all the positive classes are identify correctly. If the goal is to find all the positive instances correctly, the higher TPR/recall is favored. On the other hand, FPR is favored if the interest is to find all the negative instances correctly.
+Below animation illustrates the outcome when different cut-off thresholds are chosen. FPR starts off at 0 with a high threshold. When the threshold decreases, TPR and FPR would both increase with more false positive being classified and more true positive found. TPR would eventually reach 1 until all of the positive classes are identified correctly. If the goal is to find all of the positive instances correctly, higher TPR/recall is favored. In contrast, smaller FPR is favored when the interest is to find all of the negative instances correctly. In short, TPR:1 and FPR:0 is the desired conditions.
 
-There is no single criteria to determine the optimal threshold of the classifier. The optimal threshold would be chosen heavily based on domain knowledge and application. Take cancer problem for example, the model is to predict if the patient has cancer or not. we want catch as many patience with cancer as possible even if some patiences are false identified. Also, other measures, such as F1-measure, are also used to find the optimal threshold. F1-measure is able to manage the trade off between precision and recall rate to a balanced threshold.
+The optimal threshold is normally chosen based on domain knowledge and applications, thus no single criteria can be used to determine the optimal threshold of a classifier. Namely, cancer prediction models would have a threshold quite different from that of credit card approval prediction models. Cancer models aim to identify as many potential patients as possible even if some patients are falsely identified, whereas credit card approval models aims to identify the most qualified applicants in order to minimize false positives rate. Other measures, such as F1-measure, are also often used to determine the optimal threshold. F1-measure is capable of managing the trade off between precision and recall rate to determine a balanced performance.
 
 ![threshold animation](/images/classification/classification_threshold.gif)
 
@@ -42,16 +42,20 @@ There is no single criteria to determine the optimal threshold of the classifier
 </p>
 
 
-# Mathematical/Statistical Interpretation of AUC
+# Mathematical Interpretation of AUC
 
 In the [probabilistic perspective](https://www.alexejgossmann.com/auc), AUC is the probability of the score of a randomly chosen class + is higher than the score of randomly chosen class -.
-$$AUC = P(f(x+)>f(x-)|class(x+)=1, class(x-)=0)$$
-In other words, it measures how well the probability ranked based on their true classes. Thus, it is a threshold-invariant and scale-invariant metrics. Only the sequence matters in the predicted probabilities. Based on this property, model with higher AUC indicates better discrimination of two classes. However, the probabilities output from model with higher AUC didn't guarantee the well-calibrated probability. You could find more information in this link: [Safe Handling Instructions for Probabilistic Classification](https://www.youtube.com/watch?v=RXMu96RJj_s).
+
+$AUC = P(f(x+)>f(x-)|class(x+)=1, class(x-)=0)$
+
+In other words, it measures how well the probability ranks based on their true classes. Thus, it is a threshold-invariant and scale-invariant metrics and only the sequence matters in the predicted probabilities. Based on this property, models with higher AUC indicate better discrimination between the two classes. However, the probabilities output from models with higher AUC don't always generate well-calibrated probabilities. More information can be found here: [Safe Handling Instructions for Probabilistic Classification](https://www.youtube.com/watch?v=RXMu96RJj_s).
+
+In a real life application, finding a focused group for marketing campaign targeting is a good example for using AUC since the relative probability of each instance (rank) is of interest instead of absolute probability
 
 
 # Visualization
 
-To illustrate how AUC affected by different level of separation/discrimination, there are two distributions of probability for positive class and negative class respectively. When the more overlap between two class increase, the harder to separate two classes. It would lead to the decrease of AUC - random separation, which AUC is equal to 0.5. Interestedly, it means that the classier is a good classifier with flipped prediction if the roc curves lying in the right-bottom corner with AUC <=0.5.
+To visualize how AUC is affected by different level of separation/discrimination, the distribution of probability for both the positive and negative classes are plotted below. When the overlap of two classes increases, the harder it gets to separate them and results in the decrease of AUC - random separation, at which AUC is equal to 0.5. Interestingly, the classifier can be a good one after reversing the predictions if the ROC curve lies in the right-bottom corner with AUC <=0.5.
 
 <p align="center">
 <img src="/images/classification/prob_dist_animation.gif" width="60%"/>
@@ -62,15 +66,15 @@ To illustrate how AUC affected by different level of separation/discrimination, 
 </p>
 
 # Summary
-1. AUC is a threshold-free metrics to measure the overall performance of binary classifier.
+1. AUC is a threshold-free metrics capable of measuring the overall performance of binary classifier.
 
-2. AUC can only be used in binary classification. In multinomial classification, one-to-rest AUC would be an option with average of each class.  
+2. AUC can only be used in binary classification. In multinomial classification, one-to-rest AUC would be an option using the average of each class.  
 
-3. AUC would be a good metric for you if the interest is the rank of output probabilities and not the absolute probability. For example, we only care the relative probability to each instances(rank) when the task it to find a list of users for marketing campaign targeting.
+3. AUC is a good metric when the rank of output probabilities is of interest.
 
-3. Even if AUC is useful, AUC is not a cure-all. It is not suitable for heavily imbalanced class distribution and the goal for well-calibrated probability.
+4. Although AUC is powerful, it is not a cure-all. AUC is not suitable for heavily imbalanced class distribution and when the goal is to have well-calibrated probabilities.
 
-4. The models with maximizing AUC treat the equally weight between positive and negative class.
+5. Models with maximized AUC treat the weight between positive and negative class equally.
 
 
 ### Reference
@@ -80,4 +84,4 @@ To illustrate how AUC affected by different level of separation/discrimination, 
 4. [ROC curves and Area Under the Curve explained](https://www.dataschool.io/roc-curves-and-auc-explained/)
 5. [Probabilistic interpretation of AUC](https://www.alexejgossmann.com/auc)
 
-Some great ideas of plots are from the reference. All the plots and animation in the blog are made on my own. Please feel to use it with the reference/citation with my watermark
+**All the plots and animation in this post are made on my own with ideas inspired by above references. Please reference my website when used.**
