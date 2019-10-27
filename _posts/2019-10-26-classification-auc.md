@@ -9,10 +9,10 @@ comments: true
 
 Remember in machine learning courses, you learn that AUC is a useful metric to evaluate classifier. The higher the value (ranges from 0 to 1), the better the model is.  However, what exactly is AUC and what makes it a great metric? We'll have a deep dive and explore the theory behind.
 
-# AUC - Area under ROC curve
+# AUC - Area Under ROC Curve
 AUC is short for the Area Under ROC (Receiver Operating Characteristics) curve. As a general performance metric, AUC measures the binary classification model performance without the need to specify a threshold. Note that AUC could only be calculated if the model is capable of providing probability prediction. Before going further into AUC, let's first talk about the ROC curve.
 
-# ROC Curve - Receiver operating characteristics curve
+# ROC Curve - Receiver Operating Characteristics Curve
 
 In the figure below, the confusion matrix summarizes all of the possible conditions - true positive, false positive, true negative and false negative of a binary classification model. False positive and false negative indicate that the model incorrectly identifies the case, whereas true positive and true negative show the predictions are correct. One thing to note here is that all the measurements are determined by the predicted classes based on individual cut-off threshold of the probability. In other words, all of the measurements are single-threshold measures and they cannot provide an overview of the performance with varying threshold.
 
