@@ -49,8 +49,8 @@ In the [probabilistic perspective](https://www.alexejgossmann.com/auc), AUC is t
 $$AUC = P(f(x+)>f(x-)|class(x+)=1, class(x-)=0)\\
       = \frac{1}{PN}\sum_{i=1}^{P}\sum_{j=1}^{N} 1(f(x+)-f(x-))\\
       f(x): classifier $$
-      $$P: # of true positive item \\
-        N: # of true negative item $$
+      $P: # of true positive item \\
+        N: # of true negative item $
 </p>
 
 In other words, it measures how well the probability ranks based on their true classes. Thus, it is a threshold-invariant and scale-invariant metrics and only the sequence matters in the predicted probabilities. Based on this property, models with higher AUC indicate better discrimination between the two classes. However, the probabilities output from models with higher AUC don't always generate well-calibrated probabilities. More information can be found here: [Safe Handling Instructions for Probabilistic Classification](https://www.youtube.com/watch?v=RXMu96RJj_s).
@@ -87,6 +87,7 @@ To visualize how AUC is affected by different level of separation/discrimination
 2. [Google Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course/ml-intro)
 3. [ROC Curve](http://www.medicalbiostatistics.com/roccurve.pdf)
 4. [ROC curves and Area Under the Curve explained](https://www.dataschool.io/roc-curves-and-auc-explained/)
-5. [Probabilistic interpretation of AUC](https://www.alexejgossmann.com/auc)
+5. [AUC Visualization](http://www.navan.name/roc/)
+6. [Probabilistic interpretation of AUC](https://www.alexejgossmann.com/auc)
 
 **All the plots and animation in this post are made on my own with ideas inspired by above references. Please reference my website when used.**
