@@ -48,9 +48,9 @@ In the [probabilistic perspective](https://www.alexejgossmann.com/auc), AUC is t
 <p style="text-align: center;">
 $$AUC = P(f(x+)>f(x-)|class(x+)=1, class(x-)=0)\\
       = \frac{1}{PN}\sum_{i=1}^{P}\sum_{j=1}^{N} 1(f(x+)-f(x-))\\
-      f(x) = classifier$$
-      P = # of true positive item
-      N = # of true negative item 
+      f(x) : classifier, $$
+      P : # of true positive item,\
+      N : # of true negative item
 </p>
 
 
