@@ -15,12 +15,12 @@ avatar: https://res.cloudinary.com/misshimimi/image/upload/v1565055869/cube_kvy5
 
 #https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/logo.png
 
-# favicon tab 
+# favicon tab
 favicon: https://res.cloudinary.com/misshimimi/image/upload/v1565055858/triangle_q3acm5.png
 # https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/favicon.png
 
 
-# Navigation menu 
+# Navigation menu
 navigation:
   - name: Home
     url: /
@@ -31,18 +31,18 @@ navigation:
   - name: Tags
     url: /tags
 
-# The number of articles per pages 
+# The number of articles per pages
 paginate: 8
 
 # 文章简介的区分标记
 excerpt_separator: <!-- more -->
 
 # Social Network link (optional)
-footer-links: 
+footer-links:
   weibo: #frommidworld # https://www.weibo.com/<thispart>
   behance: # https://www.behance.net/<>
   dribbble: # https://dribbble.com/<>
-  email: sychou9@gmail.com 
+  email: sychou9@gmail.com
   facebook: #https://www.facebook.com/<>
   flickr: #https://www.flickr.com/<>
   github: sinyi-chou #https://github.com/<>
@@ -52,26 +52,26 @@ footer-links:
   rss: #RSS
   stackoverflow: # http://stackoverflow.com/<>
   tumblr: # https://<username>.tumblr.com
-  twitter: # https://www.twitter.com/<your_twitter_username> 
+  twitter: # https://www.twitter.com/<your_twitter_username>
   youtube: # channel/<your_long_string> or user/<user-name>
 
-# Footnote text 
+# Footnote text
 footer-text: Copyright (c) 2019 Sin-Yi Chou, Powered by LOFFER
 
-# Comment, Note: one type one time 
+# Comment, Note: one type one time
 
 # Disqus shortname
 disqus: misshimimi #shortname
 
 # Gitalk setting (comment)
 gitalk:
-  clientID: 
-  clientSecret: 
-  repo: 
-  owner: 
+  clientID:
+  clientSecret:
+  repo:
+  owner:
 
 # Google Analytics web tracking code
-google_analytics:
+google_analytics: UA-150974101-1
 
 # Enter your own website URL
 url: https://sinyi-chou.github.io
@@ -119,4 +119,3 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
-
