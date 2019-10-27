@@ -48,9 +48,9 @@ In the [probabilistic perspective](https://www.alexejgossmann.com/auc), AUC is t
 <p style="text-align: center;">
 $$AUC = P(f(x+)>f(x-)|class(x+)=1, class(x-)=0)\\
       = \frac{1}{PN}\sum_{i=1}^{P}\sum_{j=1}^{N} 1(f(x+)-f(x-))\\
-      f(x): classifier \\
-      P: True positive item \\
-      N: True negative item $$
+      f(x): classifier $$\\
+      $$P: # of True positive item $$ \\
+      $$N: # of True negative item $$
 </p>
 
 In other words, it measures how well the probability ranks based on their true classes. Thus, it is a threshold-invariant and scale-invariant metrics and only the sequence matters in the predicted probabilities. Based on this property, models with higher AUC indicate better discrimination between the two classes. However, the probabilities output from models with higher AUC don't always generate well-calibrated probabilities. More information can be found here: [Safe Handling Instructions for Probabilistic Classification](https://www.youtube.com/watch?v=RXMu96RJj_s).
