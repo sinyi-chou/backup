@@ -19,7 +19,7 @@ Let's start with confusion matrix with binary classification. As the figure show
 
 <p align="center">
 <img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/metric_definition.png" src="#" width="50%"  />
-<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png" src="#" width="50%" />
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png" src="#" width="40%" />
 </p>
 
 
@@ -50,21 +50,22 @@ In other words, it measures how well the probability ranked based on their true 
 
 # Visualization
 
-To illustrate how AUC affected by different level of sepearation/discrimination, there are two distributions of probability for positive class and negative class respectively. When the more overlap between two class increase, the harder to separate two classes. It would lead to the decrease of AUC - random separation. Interestedly, it means that the classifer is a good classifier with flipped prediction if the roc curves lying in the right-bottom corner.
+To illustrate how AUC affected by different level of separation/discrimination, there are two distributions of probability for positive class and negative class respectively. When the more overlap between two class increase, the harder to separate two classes. It would lead to the decrease of AUC - random separation, which AUC is equal to 0.5. Interestedly, it means that the classier is a good classifier with flipped prediction if the roc curves lying in the right-bottom corner with AUC <=0.5.
 
 <p align="center">
 <img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/prob_dist_animation.gif" src="#" width="60%" />
 </p>
 
-<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/multiple_ROCs_plot.png" src="#" width="60%" />
-
+<p align="center">
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/multiple_ROCs_plot.png" src="#" width="70%" />
+</p>
 
 # Summary
 1. AUC is a threshold-free metrics to measure the performance of binary classifier.
 
-2. auc can only be used in two class -> if you have multiple class, one to all AUC would be an option/ micro macro  
+2. AUC can only be used in two class -> if you have multiple class, one to all AUC would be an option/ micro macro  
 
-3. AUC would be a good metric for you if you care the rank of output probabilities and not the absolute probability.
+3. AUC would be a good metric for you if you care the rank of output probabilities and not the absolute probability. For example, we only care the relative probability to each instances(rank) when the task it to find a list of users for marketing campaign targeting.
 
 3. Even if auc is powerful, auc is not a cure-all. not good for well-calibrated
 and heavily imbalanced class distribution
@@ -76,20 +77,7 @@ care equally about
 ### Reference
 1. [An introduction to ROC analysis](https://www.sciencedirect.com/science/article/abs/pii/S016786550500303X)
 2. [Google Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course/ml-intro)
-3. http://www.medicalbiostatistics.com/roccurve.pdf
-https://www.dataschool.io/roc-curves-and-auc-explained/
-https://www.alexejgossmann.com/auc
-. For a binary test and a binary disease state, the following table summarizes the possible errors that one can make using the test as a prediction of a disease state measured by some gold standard
-
-
-If the test is continuous, say M, then a test positive is defined as M>c. Now we consider measures of accuracy as functions of c, i.e.
-
-TPF(c)=Pr{M>c|D=1}
-FPF(c)=Pr{M>c|D=0}
-
-The ROC curve is a plot of FPF(c) versus TPF(c).
-
-Take credit card risk problem for example, the model is to predict if the credit card application would approve or not. we want to be very sure about the prediction or it may lead to customer dissatisfaction.
-
-
-. It measures how well predictions are ranked, rather than their absolute values. So, for example, if you as a marketer want to find a list of users who will respond to a marketing campaign. AUC is a good metric to use since the predictions ranked by probability is the order in which you will create a list of users to send the marketing campaign.
+3. [ROC Curve](http://www.medicalbiostatistics.com/roccurve.pdf)
+4. [ROC curves and Area Under the Curve explained](https://www.dataschool.io/roc-curves-and-auc-explained/)
+5. [Probabilistic interpretation of AUC](https://www.alexejgossmann.com/auc)
+Some great ideas of plots are from the reference. All the plots and animation in the blog are made on my own. Please feel to use it with the reference/citation with my watermark
