@@ -17,11 +17,11 @@ AUC is short for Area under ROC(Receiver operating characteristics) curve. AUC s
 
 Let's start with confusion matrix with binary classification. As the figure shown below, confusion matrix summarizes all the conditions - true positive, false positive, true negative and false negative in a binary classification model. False positive and false negative indicate that the case is identified by model incorrectly. True positive and True negative show the predictions are correct. One thing to note here is that all the measurements are based on individual threshold (cutoffs) of the probability to identify positive and negative class. In other words, all of the measures are single-threshold measures. They couldn't provide an overview of the performance with varying threshold.
 
+</div>
 <p align="center">
-<img src="/images/classification/metric_definition.png" width="30%"  />
-<img src="/images/classification/confusion_matix.png" width="35%" />
+<img src="/images/classification/metric_definition.png" width="40%"  /><img src="/images/classification/confusion_matix.png" width="45%" />
 </p>
-
+</div>
 
  Threshold-invariant metrics are able to provide the overall performance of model despite of the chosen threshold, such as ROC/AUC & logloss. The figure below is a plot of ROC curve, which false positive rate -FPR, also called recall, (x-axis) and true positive rate - TPR (y-axis) are used for plotting. Each point in ROC curve is computed based on one cutoff threshold, labelled on the plot. AUC is the area under the curve. While ROC curve moves toward left-top, the value of AUC would increase with higher TPR and lower FPR for any threshold.
 
@@ -57,7 +57,7 @@ To illustrate how AUC affected by different level of separation/discrimination, 
 </p>
 
 <p align="center">
-<img src="/images/classification/multiple_ROCs_plot.png" width="70%" >
+<img src="/images/classification/multiple_ROCs_plot.png" width="70%" />
 </p>
 
 # Summary
