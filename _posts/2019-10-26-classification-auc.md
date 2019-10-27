@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Model Evaluation - AUC
+title: Classification Evaluation - AUC
 date: 2019-10-26
 Author: Sin-Yi Chou
 tags: [data science, classification, machine learning]
