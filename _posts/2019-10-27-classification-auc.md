@@ -16,17 +16,8 @@ AUC is short for Area under ROC(Receiver operating characteristics) curve. AUC s
 # ROC Curve - Receiver operating characteristics
 
 Let's start with confusion matrix with binary classification. As the figure shown below, confusion matrix summarizes all the conditions - true positive, false positive, true negative and false negative in a binary classification model. False positive and false negative indicate that the case is identified by model incorrectly. True positive and True negative show the predictions are correct. One thing to note here is that all the measurements are based on individual threshold (cutoffs) of the probability to identify positive and negative class. In other words, all of the measures are single-threshold measures. They couldn't provide an overview of the performance with varying threshold.
-<style>
-    div.container {
-      display: flex;
-    }
 
-    p {
-      text-align:center;
-    }
-  </style>
-
-<div class="container">
+<div>
 <p align="center">
 <img src="/images/classification/metric_definition.png" width="40%"  /><img src="/images/classification/confusion_matix.png" width="45%" />
 </p>
@@ -45,10 +36,14 @@ There is no single criteria to determine the optimal threshold of the classifier
 ![threshold animation](/images/classification/classification_threshold.gif)
 
 <p align="center">
-<img src=" /images/classification/prob_table.png" width="20%" /><img src=" /images/classification/roc_plot_animation.gif" width="70%" />
+<img src=" /images/classification/prob_table.png" width="20%" /><img src="/images/classification/roc_plot_animation.gif" width="70%" />
 </p>
 
 
+
+<p align="center">
+<img src="/images/classification/prob_table.png" style="float: left; width: 20%; margin-right: 1%; margin-bottom: 0.5em;"><img src="/images/classification/roc_plot_animation.gif" style="float: left; width: 20%; margin-right: 1%; margin-bottom: 0.5em;">
+<p style="clear: both;">
 
 # Mathematical/Statistical Interpretation of AUC
 
