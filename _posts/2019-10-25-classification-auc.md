@@ -19,8 +19,8 @@ Let's start with confusion matrix with binary classification. As the figure show
 
 ![confusion matrix](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png)
 <p align="center">
-<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/metric_definition.png" src="#" width="50%"  />
-<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png" src="#" width="45%" />
+<img src="/images/classification/metric_definition.png" src="#" width="50%"  />
+<img src="/images/classification/confusion_matix.png" src="#" width="45%" />
 </p>
 All those statistics are used to compute metrics to show the model performance in different perspective, as the figure shown below. Among all those metrics, false positive rate(x-axis) and true positive rate(y-axis) are used to plot ROC curve.
 
