@@ -65,8 +65,8 @@ $$AUC = P(f(x+) &gt; f(x-)|class(x+)=1, class(x-)=0)\\
       N : # of true negative item\]
 
 \\begin{equation}
-{AUC} & = P(f(x+) > f(x-)|class(x+)=1, class(x-)=0)\\\\
-    & = \frac{1}{PN}\sum_{i=1}^{P}\sum_{j=1}^{N} 1(f(x+)-f(x-))\\\\
+    P(f(x+) > f(x-)|class(x+)=1, class(x-)=0)\\\\
+     = \frac{1}{PN}\sum_{i=1}^{P}\sum_{j=1}^{N} 1(f(x+)-f(x-))\\\\
       f(x) : classifier, \\\\
       P : # of true positive item,\\\\
       N : # of true negative item
