@@ -1,8 +1,9 @@
----
+ ---
 layout: post
-title: Classification: Model Evaluation - AUC
-date: 2019-10-26
+title: Classification: model evaluation - AUC
+date: 2019-09-21
 Author: Sin-Yi Chou
+categories: [Data Science]
 tags: [data science, classification, machine learning]
 comments: true
 ---
@@ -14,14 +15,13 @@ AUC is short for Area under ROC(Receiver operating characteristics) curve. AUC s
 
 # ROC Curve - Receiver operating characteristics
 
-Let's start with confusion matrix with binary classification. As the figure shown below, confusion matrix summarizes all the conditions - true positive, false positive, true negative and false negative in a binary classification model. False positive and false negative indicate that the case is identified by model incorrectly. True positive and True negative show the predictions are correct. One thing to note here is that all the measurements are determined by the predicted classes based on individual cut-off threshold of the probability. In other words, all of the measures are single-threshold measures. They couldn't provide an overview of the performance with varying threshold.
-
+Let's start with confusion matrix with binary classification. As the figure shown below, confusion matrix summarizes all the conditions - true positive, false positive, true negative and false negative in a binary classification model. False positive and false negative indicate that the case is identified by model incorrectly. True positive and True negative show the predictions are correct. One thing to note here is that all the measurements are based on individual threshold (cutoffs) of the probability to identify positive and negative class. In other words, all of the measures are single-threshold measures. They couldn't provide an overview of the performance with varying threshold.
 
 <p align="center">
-<img src="/images/classification/metric_definition.png" style="float: left; width: 50%; margin-right: 1%; margin-bottom: 0.5em;"><img src="/images/classification/confusion_matix.png" style="float: left; width: 45%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="/images/classification/metric_definition.png" width="50%" /><img src="/images/classification/confusion_matix.png" width="45%" />
 </p>
-<p style="clear: both;">
-</p>
+
+
  Threshold-invariant metrics are able to provide the overall performance of model despite of the chosen threshold, such as ROC/AUC & logloss. The figure below is a plot of ROC curve, which false positive rate -FPR, also called recall, (x-axis) and true positive rate - TPR (y-axis) are used for plotting. Each point in ROC curve is computed based on one cutoff threshold, labelled on the plot. AUC is the area under the curve. While ROC curve moves toward left-top, the value of AUC would increase with higher TPR and lower FPR for any threshold.
 
 <p align="center">
@@ -34,12 +34,10 @@ There is no single criteria to determine the optimal threshold of the classifier
 
 ![threshold animation](/images/classification/classification_threshold.gif)
 
-
 <p align="center">
-<img src="/images/classification/prob_table.png" style="float: left; width: 18%; margin-right: 1%; margin-bottom: 0.5em;"><img src="/images/classification/roc_plot_animation.gif" style="float: left; width: 70%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src=" /images/classification/prob_table.png" width="18%" /><img src=" /images/classification/roc_plot_animation.gif" width="70%" />
 </p>
-<p style="clear: both;">
-</p>
+
 
 
 # Mathematical/Statistical Interpretation of AUC
@@ -54,7 +52,7 @@ In other words, it measures how well the probability ranked based on their true 
 To illustrate how AUC affected by different level of separation/discrimination, there are two distributions of probability for positive class and negative class respectively. When the more overlap between two class increase, the harder to separate two classes. It would lead to the decrease of AUC - random separation, which AUC is equal to 0.5. Interestedly, it means that the classier is a good classifier with flipped prediction if the roc curves lying in the right-bottom corner with AUC <=0.5.
 
 <p align="center">
-<img src="/images/classification/prob_dist_animation.gif" width="60%"/>
+<img src="/images/classification/prob_dist_animation.gif" width="60%" />
 </p>
 
 <p align="center">
@@ -79,5 +77,4 @@ To illustrate how AUC affected by different level of separation/discrimination, 
 3. [ROC Curve](http://www.medicalbiostatistics.com/roccurve.pdf)
 4. [ROC curves and Area Under the Curve explained](https://www.dataschool.io/roc-curves-and-auc-explained/)
 5. [Probabilistic interpretation of AUC](https://www.alexejgossmann.com/auc)
-
 Some great ideas of plots are from the reference. All the plots and animation in the blog are made on my own. Please feel to use it with the reference/citation with my watermark
