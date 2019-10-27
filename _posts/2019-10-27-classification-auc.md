@@ -18,8 +18,8 @@ AUC is short for Area under ROC(Receiver operating characteristics) curve. AUC s
 Let's start with confusion matrix with binary classification. As the figure shown below, confusion matrix summarizes all the conditions - true positive, false positive, true negative and false negative in a binary classification model. False positive and false negative indicate that the case is identified by model incorrectly. True positive and True negative show the predictions are correct. One thing to note here is that all the measurements are based on individual threshold (cutoffs) of the probability to identify positive and negative class. In other words, all of the measures are single-threshold measures. They couldn't provide an overview of the performance with varying threshold.
 
 <p align="center">
-<img src="/images/classification/metric_definition.png" width="50%"  />
-<img src="/images/classification/confusion_matix.png" width="45%" />
+<img src="/images/classification/metric_definition.png" width="30%"  />
+<img src="/images/classification/confusion_matix.png" width="35%" />
 </p>
 
 
@@ -53,11 +53,11 @@ In other words, it measures how well the probability ranked based on their true 
 To illustrate how AUC affected by different level of separation/discrimination, there are two distributions of probability for positive class and negative class respectively. When the more overlap between two class increase, the harder to separate two classes. It would lead to the decrease of AUC - random separation, which AUC is equal to 0.5. Interestedly, it means that the classier is a good classifier with flipped prediction if the roc curves lying in the right-bottom corner with AUC <=0.5.
 
 <p align="center">
-<img src="/images/classification/prob_dist_animation.gif" width="60%" />
+<img src="/images/classification/prob_dist_animation.gif" width="60%"/>
 </p>
 
 <p align="center">
-<img src="/images/classification/multiple_ROCs_plot.png" width="70%" />
+<img src="/images/classification/multiple_ROCs_plot.png" width="70%" >
 </p>
 
 # Summary
