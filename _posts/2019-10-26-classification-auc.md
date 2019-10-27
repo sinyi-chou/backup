@@ -3,7 +3,6 @@ layout: post
 title: Pandas - Classification: Model Evaluation - AUC
 date: 2019-10-26
 Author: Sin-Yi Chou
-categories: [Data Science]
 tags: [data science, classification, machine learning]
 comments: true
 ---
