@@ -46,7 +46,7 @@ The optimal threshold is normally chosen based on domain knowledge and applicati
 
 In the [probabilistic perspective](https://www.alexejgossmann.com/auc), AUC is the probability of the score of a randomly chosen class + is higher than the score of randomly chosen class -.
 
-$AUC = P(f(x+)>f(x-)|class(x+)=1, class(x-)=0)$
+$$AUC = P(f(x+)>f(x-)|class(x+)=1, class(x-)=0)$$
 
 In other words, it measures how well the probability ranks based on their true classes. Thus, it is a threshold-invariant and scale-invariant metrics and only the sequence matters in the predicted probabilities. Based on this property, models with higher AUC indicate better discrimination between the two classes. However, the probabilities output from models with higher AUC don't always generate well-calibrated probabilities. More information can be found here: [Safe Handling Instructions for Probabilistic Classification](https://www.youtube.com/watch?v=RXMu96RJj_s).
 
