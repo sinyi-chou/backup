@@ -19,7 +19,7 @@ Let's start with confusion matrix with binary classification. As the figure show
 
 <p align="center">
 <img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/metric_definition.png" src="#" width="50%"  />
-<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png" src="#" width="40%" />
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/confusion_matix.png" src="#" width="45%" />
 </p>
 
 
