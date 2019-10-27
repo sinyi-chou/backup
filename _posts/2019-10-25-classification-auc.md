@@ -29,6 +29,10 @@ All those statistics are used to compute metrics to show the model performance i
 
 Since there are countless values for the cut-off threshold to generate the predicted labels, AUC provides an aggregated view across all threshold.
 
+<p align="center">
+<img src="https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/ROC_plot.png" />
+</p>
+
  The purpose is to allow the viewer to assess the accuracy of the test M for any possible value of the cutoff c. This aids in deciding what cutoff to use in practice, comparing different tests for the same thing, and for evaluating the overall accuracy. A key advantage of our approach is that the values of the cutoffs are visible!
 
 ![threshold animation](https://github.com/sinyi-chou/sinyi-chou.github.io/blob/master/images/classification/classification_threshold.gif)
