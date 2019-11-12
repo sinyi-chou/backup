@@ -407,6 +407,7 @@ nav {
   font-family: $base-font;
   font-weight: 500;
   font-size: 18px;
+  font-weight: bold;
 
   @include mobile {
     margin-top: 9px;
