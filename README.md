@@ -1,12 +1,16 @@
-Sin-Yi's personal website 
+Sin-Yi's personal website
 
 ## Update
 
+### 2019-11-11
+
+Update the width of sidebar. Add tracking.
+
 ### 2019-08-06
 
-Clean unnecessary files and back up the website 
+Clean unnecessary files and back up the website
 
-### 2019-07-30 
+### 2019-07-30
 
 Built and set up the website. Tested how to use html format as a post.
 
@@ -16,4 +20,3 @@ Built and set up the website. Tested how to use html format as a post.
 * [Jekyll](https://github.com/jekyll/jekyll)
 * [Kiko-now](<https://github.com/aweekj/kiko-now>)
 * [Font Awesome](<https://fontawesome.com/>)
-
