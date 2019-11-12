@@ -56,8 +56,7 @@ footer-links:
   youtube: # channel/<your_long_string> or user/<user-name>
 
 # Footnote text
-footer-text: > Copyright (c) 2019 Sin-Yi Chou
-               Powered by LOFFER
+footer-text: Copyright (c) 2019 Sin-Yi Chou, Powered by LOFFER
 
 # Comment, Note: one type one time
 
