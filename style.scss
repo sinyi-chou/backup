@@ -406,7 +406,7 @@ nav {
   vertical-align: middle;
   font-family: $base-font;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 
   @include mobile {
@@ -703,7 +703,7 @@ footer {
   text-align: center;
 
   p {
-    font-size: $small-font-size;
+    font-size: $tiny-font-size;
     color: $base-lighten-color;
   }
 
