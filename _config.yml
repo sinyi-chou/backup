@@ -30,8 +30,6 @@ navigation:
     url: /archive
   - name: Tags
     url: /tags
-  - name: Resume
-    url: /resume
 
 # The number of articles per pages
 paginate: 8
