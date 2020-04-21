@@ -80,11 +80,29 @@ As shown in the ROC curves, the curves of example A are different from the ones 
 Table: AUC of positive rate vs. examples  
 </center>
 <p align="center">
-
-| AUC           | 0.5 | 0.1  | 0.01 |
-|---------------|------|-----|-----|
-| Example - A   | 0.8  | 0.8 | 0.8 |
-| Example - B   | 0.8  | 0.8 | 0.8 |
+<table>
+  <tr>
+    <th rowspan="2">AUC</th>
+    <th colspan="3">Positive rate</th>
+  </tr>
+  <tr>
+    <td>0.5</td>
+    <td>0.1<br></td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>Example - A</td>
+    <td>0.8</td>
+    <td>0.8</td>
+    <td>0.8</td>
+  </tr>
+  <tr>
+    <td>Example - B</td>
+    <td>0.8</td>
+    <td>0.8</td>
+    <td>0.8</td>
+  </tr>
+</table>
 
 </p>
 
@@ -96,11 +114,29 @@ Table: PR AUC of positive rate vs. examples
 
 <p align="center">
 
-| PR AUC        | 0.5  | 0.1  | 0.01 |
-|---------------|------|------|------|
-| Example - A   | 0.83 | 0.54 | 0.27 |
-| Example - B   | 0.75 | 0.26 | 0.03 |
-
+<table>
+  <tr>
+    <th rowspan="2">PR AUC</th>
+    <th colspan="3">Positive rate</th>
+  </tr>
+  <tr>
+    <td>0.5</td>
+    <td>0.1<br></td>
+    <td>0.01</td>
+  </tr>
+  <tr>
+    <td>Example - A</td>
+    <td>0.83</td>
+    <td>0.54</td>
+    <td>0.27</td>
+  </tr>
+  <tr>
+    <td>Example - B</td>
+    <td>0.75</td>
+    <td>0.26</td>
+    <td>0.03</td>
+  </tr>
+</table>
 </p>
 
 To conclude, PR AUC provides the ability to differentiate the performance between balanced & imbalanced data. It also helps to identify the performance around higher-rank area.  
