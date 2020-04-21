@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Precision - Recall Curve, a Different View of Performance of Imbalanced Classifiers
+title: Precision - Recall Curve, a Different View of Imbalanced Classifiers
 date: 2020-04-20
 Author: Sin-Yi Chou
 tags: [data science, classification, machine learning]
@@ -76,8 +76,9 @@ As shown in the ROC curves, the curves of example A are different from the ones 
 
 
 <center>
-
 Table: AUC of positive rate vs. examples  
+</center>
+<center>
 
 | AUC           | 0.5 | 0.1  | 0.01 |
 |---------------|------|-----|-----|
@@ -89,8 +90,10 @@ Table: AUC of positive rate vs. examples
 ![][PR_auc_compare_plot]
 
 <center>
-
 Table: PR AUC of positive rate vs. examples
+</center>
+
+<center>
 
 | PR AUC        | 0.5  | 0.1  | 0.01 |
 |---------------|------|------|------|
