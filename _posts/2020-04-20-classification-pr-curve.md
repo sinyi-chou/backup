@@ -7,10 +7,9 @@ tags: [data science, classification, machine learning]
 comments: true
 ---
 
-# What's imbalanced classification
-
 What does "balanced" mean for binary classification data? It simply means that the proportion of each class is equal. In binary classification, data is made up of two classes, positive and negative. Take 1000 samples for example, one class is 500, and the other class is 500 in balanced data. 50% of data are positive class, and vice versa. The distribution becomes skewed once it’s shifted toward one class, and is then called imbalanced data.
 
+# What's imbalanced classification
 
 Imbalanced data is common in real life, such as fraud detection, cancer detection and customer conversion. However, it is not often mentioned in machine learning theory courses, based on my learning experiences. Here are some useful notes summarized from my personal learnings on real life data, that I feel worth sharing with everyone.
 
@@ -109,6 +108,8 @@ One thing to note here is that the PR AUC serves as an alternative metric. If th
 6. [The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0118432)
 7. [Precision-Recall AUC vs ROC AUC for class imbalance problems](https://www.kaggle.com/general/7517)
 8. [Precision-recall curve](https://www.andybeger.com/content/papers/Beger_2016_PrecisionRecallCurves.pdf)
+
+
 **All the plots in this post are made on my own with ideas inspired by above references. Please reference my post when used.**
 
 [ROC_auc_area_plot]: /images/prauc/ROC_auc_area_plot.png
