@@ -7,9 +7,10 @@ tags: [data science, classification, machine learning]
 comments: true
 ---
 
-What does "balanced" mean for binary classification data? It simply means that the proportion of each class is equal. In binary classification, data is made up of two classes, positive and negative. Take 1000 samples for example, one class is 500, and the other class is 500 in balanced data. 50% of data are positive class, and vice versa. The distribution becomes skewed once it’s shifted toward one class, and is then called imbalanced data.
 
 # What's imbalanced classification
+
+What does "balanced" mean for binary classification data? It simply means that the proportion of each class is equal. In binary classification, data is made up of two classes, positive and negative. Take 1000 samples for example, one class is 500, and the other class is 500 in balanced data. 50% of data are positive class, and vice versa. The distribution becomes skewed once it’s shifted toward one class, and is then called imbalanced data.
 
 Imbalanced data is common in real life, such as fraud detection, cancer detection and customer conversion. However, it is not often mentioned in machine learning theory courses, based on my learning experiences. Here are some useful notes summarized from my personal learnings on real life data, that I feel worth sharing with everyone.
 
@@ -33,7 +34,9 @@ In this post, we are going to talk about the Precision-Recall (PR) curve, which 
 
 In ROC, the curve is composed of the false positive rate (x-axis) & the true positive rate/recall (y-axis), as shown in figure below. The area under the ROC curve (AUC) is a widely-used metric to assess the overall model performance. The value of AUC ranges from 0 to 1, the larger the better. The ROC curve would move toward the upper right corner when the model performance improves. (Find in-depth discussion in [previous post](https://sinyi-chou.github.io/classification-auc/))
 
-![][ROC_auc_area_plot]
+<p align="center">
+<img src="/images/prauc/ROC_auc_area_plot.png" width="70%" />
+</p>
 
 On the other hand, the PR curve is composed of the recall/true positive rate (x-axis) & the precision (y-axis), as shown in figure below. The area under the PR ROC curve (PR AUC) provides a different perspective on evaluating the result of binary classifier. Lager PR AUC value indicates better model performance — the PR curve would move towards the upper left corner.
 
@@ -41,7 +44,9 @@ Not all the value between 0 to 1 is achievable for PR AUC. Varying by data, the 
 
 Details: Precision = TP/(TP + FP),  when threshold = 0, TP = P, FP = N, Precision = P/(P+N)
 
-![][PR_auc_area_plot]
+<p align="center">
+<img src="/images/prauc/PR_auc_area_plot.png" width="70%" />
+</p>
 
 Note: The ROC & PR ROC figures are plotted using the same dataset, which is binary classes with balanced classes
 
@@ -51,8 +56,9 @@ When data is imbalanced, the AUC might not reflect the true performance of the c
 
 Below is a confusion matrix of an imbalanced dataset. As the figure shown, FPR shows a low value, indicating good model performance. However, precision - 0.09 - illustrates that the model is not able to distinguish between two classes well, and tend to predict more negative samples. Thus, PR AUC provides an alternative view for model performance by switching from FPR to precision.
 
-![][imbalanced_example]
-
+<p align="center">
+<img src="/images/classification/imbalanced_example.png" width="70%" />
+</p>
 
 Let’s have a deep dive into more examples. Here are the ROC curve & PR curve of the output of binary classifier at various levels of separation and positive rates. In the following examples, 5 different levels of separation are chosen— **Perfect**, **Excellent**, **Great**, **Good**, **Random** —  and 3 different positive rates are selected — 0.5, 0.1 and 0.01 ranging from the balanced toward extremely imbalanced.  The data with the same level of separation but different positive rates is all sampled from the same distribution but at different sampling rate.
 
@@ -68,18 +74,30 @@ As shown in the ROC curves, the curves of example A are different from the ones 
 
 ![][ROC_auc_compare_plot]
 
+
+<center>
+
+Table: AUC of positive rate vs. examples  
+
 | AUC           | 0.5 | 0.1  | 0.01 |
 |---------------|------|-----|-----|
 | Example - A   | 0.8  | 0.8 | 0.8 |
 | Example - B   | 0.8  | 0.8 | 0.8 |
 
+</center>
 
 ![][PR_auc_compare_plot]
+
+<center>
+
+Table: PR AUC of positive rate vs. examples
 
 | PR AUC        | 0.5  | 0.1  | 0.01 |
 |---------------|------|------|------|
 | Example - A   | 0.83 | 0.54 | 0.27 |
 | Example - B   | 0.75 | 0.26 | 0.03 |
+
+</center>
 
 To conclude, PR AUC provides the ability to differentiate the performance between balanced & imbalanced data. It also helps to identify the performance around higher-rank area.  
 
