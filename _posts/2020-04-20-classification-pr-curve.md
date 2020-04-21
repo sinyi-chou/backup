@@ -7,10 +7,11 @@ tags: [data science, classification, machine learning]
 comments: true
 ---
 
+What does "balanced" mean for binary classification data? It simply means that the proportion of each class is equal.
 
-# What's imbalanced classification
+# What's imbalanced classification?
 
-What does "balanced" mean for binary classification data? It simply means that the proportion of each class is equal. In binary classification, data is made up of two classes, positive and negative. Take 1000 samples for example, one class is 500, and the other class is 500 in balanced data. 50% of data are positive class, and vice versa. The distribution becomes skewed once it’s shifted toward one class, and is then called imbalanced data.
+In binary classification, data is made up of two classes, positive and negative. Take 1000 samples for example, one class is 500, and the other class is 500 in balanced data. 50% of data are positive class, and vice versa. The distribution becomes skewed once it’s shifted toward one class, and is then called imbalanced data.
 
 Imbalanced data is common in real life, such as fraud detection, cancer detection and customer conversion. However, it is not often mentioned in machine learning theory courses, based on my learning experiences. Here are some useful notes summarized from my personal learnings on real life data, that I feel worth sharing with everyone.
 
@@ -50,7 +51,7 @@ Details: Precision = TP/(TP + FP),  when threshold = 0, TP = P, FP = N, Precisio
 
 Note: The ROC & PR ROC figures are plotted using the same dataset, which is binary classes with balanced classes
 
-# Why we need PR curve
+# Why we need PR curve?
 
 When data is imbalanced, the AUC might not reflect the true performance of the classifier. The definition of the False Positive Rate (FPR), is the number of false positives divided by the number of negative samples. FPR is considered better when it’s smaller since it indicates fewer false positives. In imbalanced data, the FPR tends to stay at small values due to the large numbers of negatives (i.e. making the denominator large). Thus, FPR becomes less informative for the model performance in this situation.
 
@@ -106,7 +107,7 @@ To conclude, PR AUC provides the ability to differentiate the performance betwee
 
 ----
 
-# When to use PR AUC
+# When to use PR AUC?
 
 ## When two classes are equally important
 AUC would be the metric to use if the goal of the model is to perform equally well on both classes. Image classification between cats & dogs is a good example because the performance on cats is equally important on dogs.
