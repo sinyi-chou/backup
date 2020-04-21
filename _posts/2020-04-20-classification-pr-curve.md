@@ -7,14 +7,13 @@ tags: [data science, classification, machine learning]
 comments: true
 ---
 
-What does "balanced" mean for binary classification data? It simply means that the proportion of each class is equal.
+What does "balanced" mean for binary classification data? It simply means that the proportion of each class is equal. In binary classification, data is made up of two classes, positive and negative.
 
 # What's imbalanced classification?
 
-In binary classification, data is made up of two classes, positive and negative. Take 1000 samples for example, one class is 500, and the other class is 500 in balanced data. 50% of data are positive class, and vice versa. The distribution becomes skewed once it’s shifted toward one class, and is then called imbalanced data.
+Take 1000 samples for example, one class is 500, and the other class is 500 in balanced data. 50% of data are positive class, and vice versa. The distribution becomes skewed once it’s shifted toward one class, and is then called imbalanced data.
 
 Imbalanced data is common in real life, such as fraud detection, cancer detection and customer conversion. However, it is not often mentioned in machine learning theory courses, based on my learning experiences. Here are some useful notes summarized from my personal learnings on real life data, that I feel worth sharing with everyone.
-
 
 How far of a shifted distribution is considered imbalanced? There is no definite answer. Luckily there are some empirical rules to follow:
 In [Google’s online course](https://developers.google.com/machine-learning/data-prep/construct/sampling-splitting/imbalanced-data), it considers 20 - 40% minority class as mildly imbalanced, 1 - 20% as moderately imbalanced, and <1% as extremely imbalanced. (Usually, minority class indicates positive class.) In the [video](https://www.youtube.com/watch?v=_JnERKNat4w) from h2o about the top 10 pitfalls in machine learning, it suggests to consider remedies for models when the minority class accounts for less than 10% of the data.
@@ -31,6 +30,7 @@ It is important to consider remedies when it doesn’t work on true distribution
 ----
 
 # Precision-Recall Curve  
+
 In this post, we are going to talk about the Precision-Recall (PR) curve, which is similar to the ROC curve (Receiver Operation Characteristics) but with one of the axis changed from FPR to precision. Notably, the Precision-Recall curve can be used as an alternative metric to evaluate the classifier when the data is imbalanced.  
 
 In ROC, the curve is composed of the false positive rate (x-axis) & the true positive rate/recall (y-axis), as shown in figure below. The area under the ROC curve (AUC) is a widely-used metric to assess the overall model performance. The value of AUC ranges from 0 to 1, the larger the better. The ROC curve would move toward the upper right corner when the model performance improves. (Find in-depth discussion in [previous post](https://sinyi-chou.github.io/classification-auc/))
@@ -79,14 +79,14 @@ As shown in the ROC curves, the curves of example A are different from the ones 
 <center>
 Table: AUC of positive rate vs. examples  
 </center>
-<center>
+<p align="center">
 
 | AUC           | 0.5 | 0.1  | 0.01 |
 |---------------|------|-----|-----|
 | Example - A   | 0.8  | 0.8 | 0.8 |
 | Example - B   | 0.8  | 0.8 | 0.8 |
 
-</center>
+</p>
 
 ![][PR_auc_compare_plot]
 
@@ -94,14 +94,14 @@ Table: AUC of positive rate vs. examples
 Table: PR AUC of positive rate vs. examples
 </center>
 
-<center>
+<p align="center">
 
 | PR AUC        | 0.5  | 0.1  | 0.01 |
 |---------------|------|------|------|
 | Example - A   | 0.83 | 0.54 | 0.27 |
 | Example - B   | 0.75 | 0.26 | 0.03 |
 
-</center>
+</p>
 
 To conclude, PR AUC provides the ability to differentiate the performance between balanced & imbalanced data. It also helps to identify the performance around higher-rank area.  
 
