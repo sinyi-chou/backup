@@ -373,6 +373,7 @@ summary {
 
 </div>
 
+</br>
 
 <p>After the theory behind precision-recall curve is understood <a href="https://sinyi-chou.github.io/classification-pr-curve/">(previous post)</a>, the way to compute the area under the curve (AUC) of precision-recall curve for the models being developed becomes important. Thanks to the well-developed <strong>scikit-learn</strong> package, lots of choices to calculate the AUC of the precision-recall curves (PR AUC) are provided, which can be easily integrated to the existing pipeline of models.</p>
 <div id="which-function-computes-the-pr-auc" class="section level1">
@@ -382,7 +383,7 @@ summary {
 <div id="whats-average-precision" class="section level1">
 <h1>What’s average precision?</h1>
 <blockquote>
-<p>Average precision computes the average value of precision over the interval from recall = 0 to recall = 1. precision = <span class="math inline">\(p(r)\)</span>, a function of r - recall:</p>
+<p>Average precision computes the average value of precision over the interval from recall = 0 to recall = 1. precision = p(r), a function of r - recall:</p>
 </blockquote>
 <p><span class="math display">\[Average\ Precision = \int_{0}^{1} p(r)dr\]</span></p>
 <p>Does this formula give clues about what average precision stands for? Let’s look into a precision-recall curve.</p>
