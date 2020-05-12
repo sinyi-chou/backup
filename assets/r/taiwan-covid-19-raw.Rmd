@@ -1,0 +1,587 @@
+---
+title: "The effect of mask-wearing & hand-washing during COVID-19 pandemic"
+author: "Sin-Yi Chou"
+date: "2020-05-09"
+output: html_document
+---
+
+```{r setup, include=F}
+library(knitr)
+library(kableExtra)
+library(dplyr)
+library(tibble)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(ggsci)
+library(stringr)
+library(lubridate)
+library(plotly)
+library(readxl)
+library(scales)
+
+```
+
+# COVID-19 in Taiwan 
+
+```{r, echo=F,warning=F,fig.align='center', fig.width=9, fig.height= 7.5}
+
+df_tw_covid_case = read.csv("data/taiwan_cdc/covid19/嚴重特殊傳染性肺炎TaiwanCDC公布病例資訊-確診病例.csv", stringsAsFactors = F)
+
+clean_df_tw_covid_case = 
+  df_tw_covid_case %>% 
+  select(case_no = `案例編號`,
+         onset_date = `確診日`, 
+         domestic_index = `境外或是本土`) %>%
+  mutate(domestic_index = case_when( domestic_index =="境外" ~ "Imported",
+                                     domestic_index == "本土" ~ "Indigenous",
+                                     TRUE ~ "Dunmu fleet (Navy)") 
+         ) %>% 
+  mutate(onset_date = ymd(onset_date)) %>% 
+  group_by(onset_date, domestic_index) %>% 
+  summarise(case = n()) %>% 
+  ungroup() %>% 
+  spread(key=domestic_index, value = case) %>% 
+  replace(is.na(.),0) %>% 
+  arrange(onset_date) %>% 
+  mutate(cum_indigenous = cumsum(Indigenous),
+         cum_imported = cumsum(Imported),
+         cum_dunmu= cumsum(`Dunmu fleet (Navy)`)) %>%
+  mutate(total = cum_indigenous + cum_imported + cum_dunmu) %>% 
+  gather(key = "index", value="case", -onset_date) %>% 
+  mutate(cum_index = case_when(str_starts(index,"cum") ~  "cumulative",
+                               index == "total" ~ "total",
+                               TRUE ~ "daily")) %>% 
+  mutate(index = case_when(index =="cum_imported" ~ "Imported",
+                           index == "cum_indigenous" ~ "Indigenous",
+                           index == "cum_dunmu" ~ "Dunmu fleet (Navy)",
+                           TRUE ~ index)) %>% 
+  mutate(index = factor(index , levels = c("Indigenous","Imported","Dunmu fleet (Navy)" ,"total")))
+
+
+a=clean_df_tw_covid_case %>% 
+  filter(index!="total") %>%
+  ggplot() +
+  geom_bar(aes(x=onset_date, y=case, fill=index),
+           stat="identity", position="stack",
+           data = clean_df_tw_covid_case %>% 
+             filter(cum_index =="daily" )
+             )+
+  geom_point(aes(x=onset_date, y=case, color=index),
+           data = clean_df_tw_covid_case %>% 
+             filter(cum_index =="cumulative"))+
+  geom_line(aes(x=onset_date, y=case, color=index),
+             data = clean_df_tw_covid_case %>% 
+               filter(cum_index =="cumulative"))+
+  labs(x=NULL, y='Confirmed cases', 
+       title = "Daily & cumulative confirmed COVID-19 cases by sources in Taiwan",
+       fill=NULL, color=NULL)+
+  facet_wrap(vars(index), ncol = 1)+
+  scale_x_date(labels = label_date_short(), breaks = pretty_breaks(10))+
+  scale_fill_jco()+
+  scale_color_jco()+
+  theme_bw()+
+    theme(text=element_text(size=18),
+        plot.title = element_text(size=15),
+        plot.subtitle = element_text(size=10)
+  )
+
+
+plot = ggplotly(a) 
+plot[['x']][['layout']][['annotations']][[1]] <- c()
+plot[['x']][['data']][[1]]$name = "Indigenous"
+plot[['x']][['data']][[1]]$legendgroup = "Indigenous"
+plot[['x']][['data']][[2]]$name = "Imported"
+plot[['x']][['data']][[2]]$legendgroup = "Imported"
+plot[['x']][['data']][[3]]$name = "Dunmu fleet (Navy)"
+plot[['x']][['data']][[3]]$legendgroup = "Dunmu fleet (Navy)"
+plot[['x']][['data']][[4]]$name = "Indigenous"
+plot[['x']][['data']][[4]]$legendgroup = "Indigenous"
+plot[['x']][['data']][[5]]$name = "Imported"
+plot[['x']][['data']][[5]]$legendgroup = "Imported"
+plot[['x']][['data']][[6]]$name = "Dunmu fleet (Navy)"
+plot[['x']][['data']][[6]]$legendgroup = "Dunmu fleet (Navy)"
+
+plot %>% 
+ layout(font=list(family="helvetica"),
+         legend = list(x = 100, y = 0.6, 
+                       title=list(text='Source'),
+                       orientation = 'v'),
+         title = list(
+           font = list(
+             size = 20
+           ), 
+           y=3,
+           text = "Cumulative & daily confirmed COVID-19 cases by sources in Taiwan"
+         ),
+        annotations = list(
+          list(text="Confirmed cases",
+                           x=-0.07,
+                           y=0.5,
+                           ax=-0,
+                           ay=0,
+                           showarrow=F,
+                           font = list(size=18),
+                           xref="paper",
+                           yref="paper",
+                           textangle=-90,
+                           xanchor="right",
+                           yanchor="center",
+                           annotationType="axis"
+                           ),
+                     list(x = 1.05, y = -0.11, text = "Data source: Taiwan CDC", 
+                showarrow = F, xref='paper', yref='paper', 
+                xanchor='right', yanchor='auto', xshift=-15, yshift=-30,
+                font=list(size=13, color="grey 10"))),
+        margin = list(
+          t=80, b=0 
+        )) 
+
+```
+
+Note: Dummu fleet is a cluster of cases from a navy ship that returned to Taiwan after missions overseas 
+
+# Other infectious diseases in Taiwan 
+
+## Influenza 
+
+### Influenza with severe complications 
+<!-- ## 全國流感併發重症本土病例及境外移入病例 -->
+
+```{r, echo=F, fig.align='center', fig.width=9}
+
+df_severe_flu = read.csv("data/taiwan_cdc/全國流感併發重症本土病例及境外移入病例同期比較趨勢圖_all2.csv", stringsAsFactors = F)
+
+
+list_new_col = df_severe_flu %>% colnames()
+
+list_new_col[1]="onset_month"
+
+list_new_col = str_replace_all(list_new_col, "X","")
+
+colnames(df_severe_flu) = list_new_col
+
+clean_df_severe_flu = 
+  df_severe_flu %>% 
+  gather(key="year", value="case", -onset_month) %>% 
+  mutate(flu_season = if_else(onset_month>=6 & onset_month<=9,
+                              "not flu season",
+                              "flu season")) %>% 
+  mutate(month= factor(month.abb[onset_month], levels = month.abb, ordered = T)) %>%
+  mutate(plot_date = ymd(str_c(year,"-",month,"-","15"))) %>% 
+  mutate(this_year = if_else(year==2020, "this year", "other years")) %>% 
+  mutate(year2=year) %>% 
+  filter(!(year==2020 & onset_month >=5))
+
+a= clean_df_severe_flu %>% 
+  ggplot(aes(x=month, y= case, group=year))+
+  geom_line(color="grey10", size=1, alpha=0.6, linetype="dashed")+
+  geom_line(data=clean_df_severe_flu %>% filter(year==2020),
+            color="darkred", size=1.2)+
+  annotate("rect", xmin = 1, xmax = 6, ymin = 0, ymax = Inf,
+           alpha =0.2, fill="pink")+
+  annotate("rect", xmin = 10, xmax = 12, ymin = 0, ymax = Inf,
+           alpha = 0.2 ,fill="pink")+
+  annotate("text", x = 10.7, y = 1050, label = "Flu season: Oct ~ May", size=4)+
+  annotate("text", x = 0.7, y = 380, label = "2020", color="darkred", fontface="bold")+
+  annotate("text", x = 0.7, y = 250, label = "2019", color="grey10", fontface="bold",alpha=0.6)+
+  annotate("text", x = 1.7, y = 1050, label = "2016", color="grey10", fontface="bold",alpha=0.6)+  
+  scale_color_aaas()+
+  labs(x=NULL, y= "Reported cases",
+       title="Yearly comparison between 2010 ~ 2020 monthly number of national cases",
+       subtitle = "Disease: severe complication influenza, indigenous and imported",
+       caption = "Data source: Taiwan CDC",
+       size=10)+
+  theme_bw()+
+  theme(text=element_text(size=20),
+        plot.title = element_text(size=15),
+        plot.subtitle = element_text(size=10)
+  )
+
+
+plot = ggplotly(a)
+
+plot[['x']][['layout']][['shapes']] <- c()
+
+plot %>% 
+  layout(font=list(family="helvetica"),
+         shapes = list(
+           list(tyep="rect",
+                xref="x", yref="paper",
+                x0=1, y0=0, x1=6, y1=1, 
+                fillcolor = "pink", line = list(color = "pink"),
+                opacity=0.2),
+           list(tyep="rect",
+                xref="x", yref="paper",
+                x0=10, y0=0, x1=12, y1=1, 
+                fillcolor = "pink", line = list(color = "pink"),
+                opacity=0.2)),
+         annotations = 
+           list(x = 1, y = -0.1, text = "Data source: Taiwan CDC", 
+                showarrow = F, xref='paper', yref='paper', 
+                xanchor='right', yanchor='auto', xshift=-30, yshift=-30,
+                font=list(size=13, color="grey 10")),
+         margin = list(t=100),
+         title = list(
+           font = list(
+             size = 21
+           ), 
+           text = "Yearly comparison between 2010 ~ 2020 monthly number of national cases <br><sub>Disease: Influenza with severe complications, indigenous and imported</sub>"
+         )
+         )
+```
+
+
+### Outpatient of influenza
+<!-- ## 流感及其所致肺炎門診 -->
+
+```{r, echo=F, fig.align='center', fig.width=9}
+
+df_flu_lung <- read.csv("data/taiwan_cdc/健保流感及其所致肺炎門診年齡別就診人次趨勢圖(2010年01週_2020年18週).csv",stringsAsFactors = )
+
+
+week_map = read_excel("data/taiwan_cdc/WEEKDATE.xls")
+
+week_date_map = week_map %>% 
+  mutate_if(is.character, as.numeric) %>% 
+  group_by(year, week) %>% 
+  # mutate(week_day = rank(date)) %>% 
+  # mutate(max_week_day = max(week_day)) %>% 
+  filter(rank(date)== max(rank(date))) %>% 
+  ungroup()
+
+
+clean_column <- function(df){
+  list_new_col = df %>% colnames()
+  
+  list_new_col[1]="week"
+  
+  list_new_col = str_replace_all(list_new_col, "X","")
+  
+  colnames(df) = list_new_col
+  
+  df %>% 
+    gather(key="year", value="case", -week) %>%
+    mutate_if(is.character, as.numeric) %>% 
+    inner_join(week_date_map, by=c("year","week")) %>% 
+    mutate(onset_month=month(date)) %>% 
+    group_by(year, onset_month) %>% 
+    summarise(case = sum(case, na.rm = T)) %>% 
+    ungroup() %>% 
+    mutate(flu_season = if_else(onset_month>=6 & onset_month<=9,
+                                "not flu season",
+                                "flu season")) %>%
+    mutate(month= factor(month.abb[onset_month], levels = month.abb, ordered = T)) %>%
+    mutate(this_year = if_else(year==2020, "this year", "other years")) %>%
+    mutate(year2=year) %>% 
+    filter(!(year==2020 & onset_month >=5))
+  
+}
+
+clean_df_flu_lung <- clean_column(df_flu_lung)
+
+a= clean_df_flu_lung %>% 
+  ggplot(aes(x=month, y= case, group=year))+
+  geom_line(color="grey10", size=1, alpha=0.6, linetype="dashed")+
+  geom_line(data=clean_df_flu_lung %>% filter(year==2020),
+            color="darkred", size=1.2)+
+  annotate("rect", xmin = 1, xmax = 6, ymin = 0, ymax = Inf,
+           alpha =0.2, fill="pink")+
+  annotate("rect", xmin = 10, xmax = 12, ymin = 0, ymax = Inf,
+           alpha = 0.2 ,fill="pink")+
+  annotate("text", x = 10.8, y = 420000, label = "Flu season: Oct ~ May", size=4)+
+  annotate("text", x = 0.7, y = 285000, label = "2020", color="darkred", fontface="bold")+  
+  scale_y_continuous(labels = label_number_si(accuracy = 1.0),
+                     breaks = pretty_breaks(5))+
+  labs(x=NULL, y= "Reported cases",
+       title="Yearly comparison between 2010 ~ 2020 monthly number of national cases",
+       subtitle = "Influenza, outpatient",
+       caption = "Data source: Taiwan CDC",
+       size=10)+
+  theme_bw()+
+  theme(text=element_text(size=20),
+        plot.title = element_text(size=15),
+        plot.subtitle = element_text(size=10)
+  )
+
+plot = ggplotly(a)
+
+plot[['x']][['layout']][['shapes']] <- c()
+
+plot %>% 
+  layout(font=list(family="helvetica"),
+         shapes = list(
+           list(tyep="rect",
+                xref="x", yref="paper",
+                x0=1, y0=0, x1=6, y1=1, 
+                fillcolor = "pink", line = list(color = "pink"),
+                opacity=0.2),
+           list(tyep="rect",
+                xref="x", yref="paper",
+                x0=10, y0=0, x1=12, y1=1, 
+                fillcolor = "pink", line = list(color = "pink"),
+                opacity=0.2)),
+         annotations = 
+           list(x = 1, y = -0.1, text = "Data source: Taiwan CDC", 
+                showarrow = F, xref='paper', yref='paper', 
+                xanchor='right', yanchor='auto', xshift=-15, yshift=-30,
+                font=list(size=13, color="grey 10")),
+         margin = list(t=100),
+         title = list(
+           font = list(
+             size = 20
+           ), 
+           text = "Yearly comparison between 2010 ~ 2020 monthly number of national cases <br><sub>Disease: Influenza, outpatient</sub>"
+         ))
+
+
+```
+
+
+### Outpatient of other Pneumonia
+
+<!-- ## 其他肺炎 -->
+
+```{r, echo=F, fig.align='center', fig.width=9}
+
+df_other_lung = read.csv("data/taiwan_cdc/健保其他肺炎門診年齡別就診人次趨勢圖(2010年01週_2020年18週).csv", stringsAsFactors = F)
+
+clean_df_other_lung = clean_column(df_other_lung)
+
+a= clean_df_other_lung  %>% 
+  ggplot(aes(x=month, y= case, group=year))+
+  geom_line(color="grey10", size=1, alpha=0.6, linetype="dashed")+
+  geom_line(data=clean_df_other_lung  %>% filter(year==2020),
+            color="darkred", size=1.2)+
+  annotate("rect", xmin = 1, xmax = 6, ymin = 0, ymax = Inf,
+           alpha =0.2, fill="pink")+
+  annotate("rect", xmin = 10, xmax = 12, ymin = 0, ymax = Inf,
+           alpha = 0.2 ,fill="pink")+
+  annotate("text", x = 10.8, y = 185000, label = "Flu season: Oct ~ May", size=4)+
+  annotate("text", x = 0.7, y = 114000, label = "2020", color="darkred", fontface="bold")+
+  scale_y_continuous(labels = label_number_si(accuracy = 1.0),
+                     breaks = pretty_breaks(5))+
+  labs(x=NULL, y= "Reported cases",
+       title="Yearly comparison between 2010 ~ 2020 monthly number of national cases",
+       subtitle = "Other Pneumonia",
+       caption = "Data source: Taiwan CDC",
+       size=10)+
+  theme_bw()+
+  theme(text=element_text(size=20),
+        plot.title = element_text(size=15),
+        plot.subtitle = element_text(size=10)
+  )
+
+
+plot = ggplotly(a)
+
+plot[['x']][['layout']][['shapes']] <- c()
+
+plot %>% 
+  layout(font=list(family="helvetica"),
+         shapes = list(
+           list(tyep="rect",
+                xref="x", yref="paper",
+                x0=1, y0=0, x1=6, y1=1, 
+                fillcolor = "pink", line = list(color = "pink"),
+                opacity=0.2),
+           list(tyep="rect",
+                xref="x", yref="paper",
+                x0=10, y0=0, x1=12, y1=1, 
+                fillcolor = "pink", line = list(color = "pink"),
+                opacity=0.2)),
+         annotations = 
+           list(x = 1, y = -0.1, text = "Data source: Taiwan CDC", 
+                showarrow = F, xref='paper', yref='paper', 
+                xanchor='right', yanchor='auto', xshift=-15, yshift=-30,
+                font=list(size=13, color="grey 10")),
+         margin = list(t=100),
+         title = list(
+           font = list(
+             size = 20
+           ), 
+           text = "Yearly comparison between 2010 ~ 2020 monthly number of national cases <br><sub>Disease: other Pneumonia</sub>"
+         ))
+```
+
+## Enterovirus
+
+### Enterovirus infection with severe complications
+<!-- ## 全國腸病毒感染併發重症本土病例及境外移入 -->
+```{r, echo=F, fig.align='center', fig.width=9}
+df_ent = read.csv("data/taiwan_cdc/全國腸病毒感染併發重症本土病例及境外移入病例同期比較趨勢圖_all2.csv", stringsAsFactors = F)
+
+clean_column <- function(df){
+  list_new_col = df %>% colnames()
+  
+  list_new_col[1]="onset_month"
+  
+  list_new_col = str_replace_all(list_new_col, "X","")
+  
+  colnames(df) = list_new_col
+  
+  df %>% 
+    gather(key="year", value="case", -onset_month) %>% 
+    mutate(flu_season = if_else(onset_month>=6 & onset_month<=9,
+                                "not flu season",
+                                "flu season")) %>% 
+    mutate(month= factor(month.abb[onset_month], levels = month.abb, ordered = T)) %>%
+    mutate(plot_date = ymd(str_c(year,"-",month,"-","15"))) %>% 
+    mutate(this_year = if_else(year==2020, "this year", "other years")) %>% 
+    mutate(year2=year) %>% 
+    filter(!(year==2020 & onset_month >=5))
+}
+
+clean_df_ent = clean_column(df_ent)
+
+a= clean_df_ent %>% 
+  ggplot(aes(x=month, y= case, group=year))+
+  geom_line(color="grey10", size=1, alpha=0.6, linetype="dashed")+
+  geom_line(data=clean_df_ent %>% filter(year==2020),
+            color="darkred", size=1.2)+
+  annotate("rect", xmin = 1, xmax = 6, ymin = 0, ymax = Inf,
+           alpha =0.2, fill="pink")+
+  annotate("rect", xmin = 10, xmax = 12, ymin = 0, ymax = Inf,
+           alpha = 0.2 ,fill="pink")+
+      annotate("text", x = 9.3, y = 37, label = "Enterovirus season: Apr ~ Nov", size=4)+
+  annotate("text", x = 0.7, y = 4, label = "2020", color="darkred", fontface="bold")+
+  # annotate("text", x = 0.7, y = 250, label = "2019", color="grey10", fontface="bold",alpha=0.6)+
+  # annotate("text", x = 1.7, y = 1050, label = "2016", color="grey10", fontface="bold",alpha=0.6)+  
+  scale_color_aaas()+
+  labs(x=NULL, y= "Reported cases",
+       title="Yearly comparison between 2010 ~ 2020 monthly number of national cases",
+       caption = "Data source: Taiwan CDC",
+       size=10)+
+  theme_bw()+
+  theme(text=element_text(size=20),
+        plot.title = element_text(size=15),
+        plot.subtitle = element_text(size=10)
+  )
+
+plot = ggplotly(a)
+
+plot[['x']][['layout']][['shapes']] <- c()
+
+plot %>% 
+  layout(font=list(family="helvetica"),
+         shapes = list(
+           list(tyep="rect",
+                xref="x", yref="paper",
+                x0=4, y0=0, x1=11, y1=1, 
+                fillcolor = "pink", line = list(color = "pink"),
+                opacity=0.2)),
+         annotations = 
+           list(x = 1, y = -0.1, text = "Data source: Taiwan CDC", 
+                showarrow = F, xref='paper', yref='paper', 
+                xanchor='right', yanchor='auto', xshift=-15, yshift=-30,
+                font=list(size=13, color="grey 10")),
+         margin = list(t=100),
+         title = list(
+           font = list(
+             size = 20
+           ), 
+           text = "Yearly comparison between 2010 ~ 2020 monthly number of national cases <br><sub>Disease: Enterovirus infection with severe complications, indigenous and imported</sub>"
+         ))
+```
+
+
+### Outpatient and emergency of Enterovirus infection
+<!-- ## 健保腸病毒門診+急診 -->
+
+```{r, echo=F, fig.align='center', fig.width=9}
+
+df_ent_case = read.csv("data/taiwan_cdc/健保腸病毒門診-+-急診年齡別就診人次趨勢圖(2010年01週_2020年18週).csv", stringsAsFactors = F)
+
+clean_column <- function(df){
+  list_new_col = df %>% colnames()
+  
+  list_new_col[1]="week"
+  
+  list_new_col = str_replace_all(list_new_col, "X","")
+  
+  colnames(df) = list_new_col
+  
+ df %>% 
+   gather(key="year", value="case", -week) %>%
+   mutate_if(is.character, as.numeric) %>% 
+   inner_join(week_date_map, by=c("year","week")) %>% 
+   mutate(onset_month=month(date)) %>% 
+   group_by(year, onset_month) %>% 
+   summarise(case = sum(case, na.rm = T)) %>% 
+   ungroup() %>% 
+   mutate(flu_season = if_else(onset_month>=6 & onset_month<=9,
+                               "not flu season",
+                               "flu season")) %>%
+   mutate(month= factor(month.abb[onset_month], levels = month.abb, ordered = T)) %>%
+   mutate(this_year = if_else(year==2020, "this year", "other years")) %>%
+   mutate(year2=year) %>% 
+   filter(!(year==2020 & onset_month >=5))
+
+}
+
+
+clean_df_ent_case = clean_column(df_ent_case) 
+
+
+a= clean_df_ent_case %>% 
+  ggplot(aes(x=month, y= case, group=year))+
+  geom_line(color="grey10", size=1, alpha=0.6, linetype="dashed")+
+  geom_line(data=clean_df_ent_case %>% filter(year==2020),
+            color="darkred", size=1.2)+
+  annotate("rect", xmin = 3, xmax = 11, ymin = 0, ymax = Inf,
+           alpha =0.2, fill="pink")+
+  annotate("text", x = 0.7, y = 22000, label = "2020", color="darkred", fontface="bold")+
+  annotate("text", x = 9.3, y = 165000, label = "Enterovirus season: Apr ~ Nov", size=4)+
+  scale_color_aaas()+
+  scale_y_continuous(labels = label_number_si(accuracy = 1.0),
+                     breaks = pretty_breaks(5))+
+  labs(x=NULL, y= "Reported cases",
+       title="Yearly comparison between 2010 ~ 2020 monthly number of national cases",
+       caption = "Data source: Taiwan CDC",
+       size=10)+
+  theme_bw()+
+  theme(text=element_text(size=20),
+        plot.title = element_text(size=15),
+        plot.subtitle = element_text(size=10)
+  )
+
+plot = ggplotly(a)
+
+plot[['x']][['layout']][['shapes']] <- c()
+
+plot %>% 
+  layout(font=list(family="helvetica"),
+         shapes = list(
+           list(tyep="rect",
+                xref="x", yref="paper",
+                x0=4, y0=0, x1=11, y1=1, 
+                fillcolor = "pink", line = list(color = "pink"),
+                opacity=0.2)),
+         annotations = 
+           list(x = 1, y = -0.1, text = "Data source: Taiwan CDC", 
+                showarrow = F, xref='paper', yref='paper', 
+                xanchor='right', yanchor='auto', xshift=-15, yshift=-30,
+                font=list(size=13, color="grey 10")),
+         margin = list(t=100),
+         title = list(
+           font = list(
+             size = 20
+           ), 
+           text = "Yearly comparison between 2010 ~ 2020 monthly number of national cases <br><sub>Disease: Enterovirus infection, outpatient and emergency </sub>"
+         ))
+
+
+
+```
+
+# Reference 
+
+1. [Taiwan CDC](https://www.cdc.gov.tw/En)
+    - [COVID-19](https://sites.google.com/cdc.gov.tw/2019-ncov/taiwan)
+    - [Influenza](https://nidss.cdc.gov.tw/en/CDCWNH07.aspx?dc=1&dt=4&disease=487a)
+    - [Enterovirus](https://nidss.cdc.gov.tw/en/CDCWNH07.aspx?dc=1&dt=3&disease=0749)
+    - [Other Pneumonia](https://nidss.cdc.gov.tw/en/CDCWNH09.aspx)
+2. [Post in PTT by TheoEpstein](https://www.ptt.cc/bbs/Gossiping/M.1587879423.A.012.html?fbclid=IwAR2xO8xVmjyuyJxnmLG07489Wm-J7o9qet5vyS4O5d47UuF9E-si5YvLbEI) 
+3. [COVID19 cases in Taiwan](https://docs.google.com/spreadsheets/d/1I9EXxe-pWLhcLosakg5TPt98ERY6tdpJn1KngIGY7oY/edit#gid=0)
+
+* All data are downloaded as of May 9, 2020. The data of May 2020 is not included in the plots since the data of May is not yet complete.
