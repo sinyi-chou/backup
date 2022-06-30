@@ -33,13 +33,13 @@ It is important to consider remedies when it doesn’t work on true distribution
 
 In this post, we are going to talk about the Precision-Recall (PR) curve, which is similar to the ROC curve (Receiver Operation Characteristics) but with one of the axis changed from FPR to precision. Notably, the Precision-Recall curve can be used as an alternative metric to evaluate the classifier when the data is imbalanced.  
 
-In ROC, the curve is composed of the false positive rate (x-axis) & the true positive rate/recall (y-axis), as shown in figure below. The area under the ROC curve (AUC) is a widely-used metric to assess the overall model performance. The value of AUC ranges from 0 to 1, the larger the better. The ROC curve would move toward the upper right corner when the model performance improves. (Find in-depth discussion in [previous post](https://sinyi-chou.github.io/classification-auc/))
+In ROC, the curve is composed of the false positive rate (x-axis) & the true positive rate/recall (y-axis), as shown in figure below. The area under the ROC curve (AUC) is a widely-used metric to assess the overall model performance. The value of AUC ranges from 0 to 1, the larger the better. The ROC curve would move toward the upper left corner when the model performance improves. (Find in-depth discussion in [previous post](https://sinyi-chou.github.io/classification-auc/))
 
 <p align="center">
 <img src="/images/prauc/ROC_auc_area_plot.png" width="70%" />
 </p>
 
-On the other hand, the PR curve is composed of the recall/true positive rate (x-axis) & the precision (y-axis), as shown in figure below. The area under the PR ROC curve (PR AUC) provides a different perspective on evaluating the result of binary classifier. Lager PR AUC value indicates better model performance — the PR curve would move towards the upper left corner.
+On the other hand, the PR curve is composed of the recall/true positive rate (x-axis) & the precision (y-axis), as shown in figure below. The area under the PR ROC curve (PR AUC) provides a different perspective on evaluating the result of binary classifier. Lager PR AUC value indicates better model performance — the PR curve would move towards the upper right corner.
 
 Not all the value between 0 to 1 is achievable for PR AUC. Varying by data, the baseline of PR curve is the horizontal line with y equals the value of the positive rate — P/(P+N) — the smallest value of precision. When the threshold goes to 0 (i.e. the rightmost point in the graph), all samples are classified as positive samples. That is, the number of true positive is equal to the number of positive samples. Thus, the value of the baseline decreases when the data become more imbalanced.  
 
